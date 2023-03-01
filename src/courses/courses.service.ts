@@ -1,14 +1,15 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Course } from 'src/entities/course.entity';
+import { CourseEntity } from 'src/courses/entities/course.entity/course.entity';
 import { Repository } from 'typeorm';
 import { CreateCourseDto } from './dto/create-course.dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto/update-course.dto';
 
 @Injectable()
-export class CoursesService {constructor(
-    @InjectRepository(Course)
-    private readonly courseRepository: Repository<Course>,
+export class CoursesService {
+  constructor(
+    @InjectRepository(CourseEntity)
+    private readonly courseRepository: Repository<CourseEntity>,
   ) {}
 
   findAll() {
@@ -19,7 +20,7 @@ export class CoursesService {constructor(
     const course = this.courseRepository.findOne(id);
 
     if (!course) {
-      throw new NotFoundException(`Course ID ${id} not found`);
+      throw new NotFoundException(`CourseEntity ID ${id} not found`);
     }
 
     return course;
@@ -38,7 +39,7 @@ export class CoursesService {constructor(
     });
 
     if (!course) {
-      throw new NotFoundException(`Course ID ${id} not found`);
+      throw new NotFoundException(`CourseEntity ID ${id} not found`);
     }
 
     return this.courseRepository.save(course);
@@ -47,9 +48,8 @@ export class CoursesService {constructor(
   async remove(id: string) {
     const course = await this.courseRepository.findOne(id);
     if (!course) {
-      throw new NotFoundException(`Course ID ${id} not found`);
+      throw new NotFoundException(`CourseEntity ID ${id} not found`);
     }
     return this.courseRepository.remove(course);
-    
   }
 }
