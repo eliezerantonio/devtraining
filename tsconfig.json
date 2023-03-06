@@ -18,6 +18,6 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false
   },
-  "inlcude": ["src"],
+  "include": ["src"],
   "exclude" : ["node_modules","build","dist",".docker"],
 }

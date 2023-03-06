@@ -6,7 +6,7 @@ npm run build
 
 npx typeorm migration:run 
 
-npm install
+npm run start:dev
 
 
 
