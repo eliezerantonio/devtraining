@@ -7,7 +7,7 @@ export class CreateTagsTable1678011239601 implements MigrationInterface {
         name: 'tags',
         columns: [
           { name: 'id', type: 'uuid', isPrimary: true },
-          { name: 'description', type: 'varchar' },
+          { name: 'name', type: 'varchar' },
           {
             name: 'created_at',
             type: 'timestamp',

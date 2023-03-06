@@ -10,7 +10,6 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-
 @Entity('courses')
 export class CourseEntity {
   @PrimaryGeneratedColumn('uuid')
@@ -22,7 +21,7 @@ export class CourseEntity {
   @Column()
   description: string;
 
-  @JoinTable()
+  @JoinTable({ name: 'courses_tags' })
   @ManyToMany(() => TagEntity, (tag) => tag.courses, { cascade: true })
   tags: TagEntity[];
 
