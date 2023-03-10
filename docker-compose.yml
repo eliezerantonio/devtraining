@@ -24,7 +24,21 @@ services:
       - .docker/dbdata:/var/lib/postgressql/data
     environment:
       - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=trainingnestjs
+      - POSTGRES_DB=trainingnestjs 
+
+  dbtest:
+    build: .docker/postgres 
+    container_name: training-nestjs-dbtest
+    restart: always
+    tty: true
+    ports:
+      - "5433:5432"
+    volumes:
+      - .docker/dbdatatest:/var/lib/postgressql/data
+    environment:
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=testdb
+
   
   pgadmin:
     image: dpage/pgadmin4
