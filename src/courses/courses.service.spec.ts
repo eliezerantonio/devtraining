@@ -54,6 +54,32 @@ describe('CoursesService', () => {
     expect(expectOutputCourse).toStrictEqual(newCourse);
   });
 
+  it('should return list courses', async () => {
+    const expectOutputTags = [{ id, name: 'nestjs', created_at: date }];
+
+    const expectOutputCourse = [
+      {
+        id,
+        name: 'Treinamento',
+        description: 'Treinando nestjs',
+        created_at: date,
+        tags: expectOutputTags,
+      },
+    ];
+    const mockCourseRepository = {
+      findAll: jest.fn().mockReturnValue(Promise.resolve(expectOutputCourse)),
+      find: jest.fn().mockReturnValue(Promise.resolve(expectOutputCourse)),
+    };
+
+    //@ts-expect-error defined part of methods
+    service['courseRepository'] = mockCourseRepository;
+
+    const courses = await service.findAll();
+
+    expect(mockCourseRepository.find).toBeCalled();
+    expect(expectOutputCourse).toStrictEqual(courses);
+  });
+
   // describe('findOne', () => {
   //   describe('find course by ID', () => {
   //     it('should return object course', async () => {
