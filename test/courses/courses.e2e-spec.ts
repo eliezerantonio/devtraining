@@ -32,6 +32,7 @@ describe('Courses: /courses', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
+
     app.useGlobalPipes(
       new ValidationPipe({
         whitelist: true,
@@ -41,14 +42,24 @@ describe('Courses: /courses', () => {
     );
     await app.init();
   });
-    
-    
-    afterAll(async () => {
-        
-        await app.close();
-    })
 
-  it('Create POST  /courses', () => {
-    return request(app.getHttpServer()).post('/courses').send(course).expect(HttpStatus.CREATED);
+  afterAll(async () => {
+    await app.close();
+  });
+
+  it('Create POST /courses', () => {
+    return request(app.getHttpServer())
+      .post('/courses')
+      .send(course)
+      .expect(HttpStatus.CREATED)
+      .then(({ body }) => {
+        const expectdCourse = jasmine.objectContaining({
+          ...course,
+          tags: jasmine.arrayContaining(
+            course.tags.map((name) => jasmine.objectContaining({ name })),
+          ),
+        });
+        expect(body).toEqual(expectdCourse);
+      });
   });
 });
