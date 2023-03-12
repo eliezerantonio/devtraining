@@ -4,7 +4,6 @@ import { CreateTagsTable1678011239601 } from './migrations/1678011239601-CreateT
 import { CreateCoursesTagsTable1678013232771 } from './migrations/1678013232771-CreateCoursesTagsTable';
 import { AddCoursesIdToCoursesTagsTable1678013846703 } from './migrations/1678013846703-AddCoursesIdToCoursesTagsTable';
 import { AddTagsIdToCoursesTagsTable1678014418938 } from './migrations/1678014418938-AddTagsIdToCoursesTagsTable';
-import { CoursesRefactoringTest1678496371646 } from './migrations/1678496371646-CoursesRefactoringTest';
 
 export const databaseProviders = [
   {
@@ -41,6 +40,5 @@ export const dataSource = new DataSource({
     CreateCoursesTagsTable1678013232771,
     AddCoursesIdToCoursesTagsTable1678013846703,
     AddTagsIdToCoursesTagsTable1678014418938,
-    CoursesRefactoringTest1678496371646,
   ],
 });
